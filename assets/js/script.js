@@ -31,6 +31,7 @@ function getCoordinates(citySearch) {
   })
   .then(function(data){
       console.log(data);
+    fetchWeather(data.coord)
   })
 }
 
@@ -51,5 +52,25 @@ function searchSubmit(event){
 searchForm.addEventListener("submit", searchSubmit);
 
 function fetchWeather(){
+    var lat=33.749;
+    var lon=-84.388;
+    // var apiUrl = `${rootUrl}/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
+    var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+
+
+
+    fetch(apiUrl)
+    .then(function(response){
+        console.log('response boy',response)
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data);
+    })
+    .catch(function(err){
+        console.error(err)
+    })
 }
+
+fetchWeather();
